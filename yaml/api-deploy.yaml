@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: mytemplate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mytemplate
+  template:
+    metadata:
+      labels:
+        app: mytemplate
+    spec:
+      containers:
+      - name: api
+        image: api
+        ports:
+        - containerPort: 3001
