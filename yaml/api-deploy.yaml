@@ -1,21 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: template-api
   labels:
-    app: mytemplate
+    app: template
+    type: api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mytemplate
+      app: template
+      type: api
   template:
     metadata:
       labels:
-        app: mytemplate
+        app: template
+        type: api
     spec:
       containers:
-      - name: api
-        image: api
-        ports:
-        - containerPort: 3001
+        - name: template-api
+          image: template/api
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 3001

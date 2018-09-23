@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: template
+    type: api
+  name: template-api
+  selfLink: /api/v1/namespaces/default/services/template-api
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - port: 3001
+      protocol: TCP
+      targetPort: 3001
+  selector:
+    app: template
+    type: api
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

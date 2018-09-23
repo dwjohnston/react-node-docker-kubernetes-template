@@ -1,21 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-frontend
+  name: template-frontend
   labels:
-    app: mytemplate
+    app: template
+    type: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mytemplate
+      app: template
+      type: frontend
+
   template:
     metadata:
       labels:
-        app: mytemplate
+        app: template
+        type: frontend
+
     spec:
       containers:
-      - name: nginx-frontend
-        image: fe
-        ports:
-        - containerPort: 80
+        - name: template-frontend
+          image: template/frontend
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 80

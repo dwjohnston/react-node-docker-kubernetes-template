@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: template
+    type: frontend
+  name: template-frontend
+  selfLink: /api/v1/namespaces/default/services/template-frontend
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: template
+    type: frontend
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

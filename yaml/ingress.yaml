@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: template-ingress
+  labels:
+    app: template
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: template.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: template-frontend
+              servicePort: 80
+          - path: /api
+            backend:
+              serviceName: template-api
+              servicePort: 3001
