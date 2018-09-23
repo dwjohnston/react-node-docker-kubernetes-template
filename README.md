@@ -36,35 +36,38 @@ This is a good option to use if you making changes to just the frontend, and nee
 
 ## Running on Minikube
 
+Look into each of the scripts folders to see what they do.
+
 **todo** add kubernetes and minikube installation instructions
 
-Starting Minikube:
+### Starting Minikube:
 
 ```
-minikube start
-eval $(minikube docker-env)
+./scripts/start-minikube.sh
 ```
 
-Run each of the docker build scripts in each of the folders
+### Building images
 
 ```
-./scripts/build.sh
+./scripts/build-all.sh
 ```
 
-Deploy all of the kubernetes deployments
+### Deploying to cluster
 
 ```
-kubectl create -f yaml/content-api.yaml
-kubectl create -f yaml/api-bot.yaml
-kubectl create -f yaml/nginx-frontend.yaml
+./scripts/deploy-all.sh
 ```
 
-Expose the frontend
+### Hack your host file:
+
+I don't quite like this step - and this is only necessary if you're going down the ingress route. Which is what we're doing here.
 
 ```
-kubectl expose deploy nginx-frontend --type=PortForward
+echo "$(minikube ip) template.example.com" | sudo tee -a /etc/hosts
 ```
 
 ## Converting this template for your own project usage
 
 - Replace docker image tag names from `template/` to `[yourprojectname]/`.
+- Replace yaml app names from `template` to `[yourprojectname]`
+- Change the hosts name in the ingress.yaml to whatever you want. And change the host file to match.
