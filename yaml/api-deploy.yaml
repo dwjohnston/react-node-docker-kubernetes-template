@@ -21,5 +21,13 @@ spec:
         - name: template-api
           image: template/api
           imagePullPolicy: "IfNotPresent"
+          env:
+            - name: TEMPLATE_USERNAME
+              value: "myusername"
+            - name: TEMPLATE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: template-secret
+                  key: password
           ports:
             - containerPort: 3001
